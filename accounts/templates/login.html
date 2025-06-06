@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'src/css/login.css' %}">
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <form method="post" class="space-y-4">
+            <h2>Login</h2>
+            {% csrf_token %}
+           {{ form.as_p }}
+            <button type="submit">Log In</button>
+            <a href="{% url 'password_reset' %}">Forget Password</a>
+            <div class="register">
+                <p>Don't have an account? <a href="{% url 'signup' %}">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+        alertify.set('notifier', 'position', 'top-left');
+        alertify.error('{{ message|escapejs }}');
+    </script>
+    {% endfor %}
+    {% endif %}
+
+
+</body>
+
+</html>

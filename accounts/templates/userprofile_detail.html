@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ profile.first_name }}
+{% endblock title %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-16 bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">👤 Profile Details</h1>
+
+    <div class="space-y-4 text-gray-700">
+        <p><strong>First Name:</strong> {{ profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+        <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+    </div>
+
+    <div class="flex justify-between items-center mt-8">
+        <a href="{% url 'profile-update' %}" class="text-blue-600 hover:underline font-medium">✏️ Edit Profile</a>
+        <a href="{% url 'profile-delete' %}" class="text-red-600 hover:underline font-medium">🗑️ Delete Profile</a>
+        <a href="{% url 'logout' %}" class="text-gray-600 hover:underline font-medium">🚪 Logout</a>
+    </div>
+</div>
+{% endblock content %}

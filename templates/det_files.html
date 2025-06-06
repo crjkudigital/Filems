@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ folder.folder_name }}{% endblock title %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">
+        📂 Files in "{{ folder.folder_name }}"
+    </h1>
+
+    {% if files %}
+    <ul class="space-y-4">
+        {% for file in files %}
+        <li class="flex items-center justify-between p-4 border rounded-lg hover:shadow transition">
+            <div class="flex items-center gap-4">
+                <img src="{% static 'icons/document_9789253.png' %}" alt="File icon" class="w-6 h-6">
+                <p>{{ file.file_name }}</p>
+            </div>
+
+            <div class="flex items-center gap-3 text-sm">
+                <form action="{% url 'delete_file' file.pk %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button type="submit"
+                        class="text-red-600 hover:text-red-800 font-semibold">🗑️ Delete</button>
+                </form>
+                <span class="text-gray-300">|</span>
+                <a href="{% url 'secure_media' file.id %}" target="_blank" class="text-blue-600 hover:underline">
+                    Download
+                </a>
+
+                <span class="text-gray-300">|</span>
+                <a href="{% url 'copy_file' file.pk %}" class="text-yellow-600 hover:text-yellow-800 font-semibold">
+                    📋 Copy
+                </a>
+                <span class="text-gray-300">|</span>
+                <a href="{% url 'move_file' file.pk %}" class="text-green-600 hover:text-green-800 font-semibold">
+                    📂 Move
+                </a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-gray-500 text-center mt-4">No files found in this folder.</p>
+    {% endif %}
+</div>
+{% endblock %}

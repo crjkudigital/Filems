@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Recycle Bin{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <h2>🗑️ Recycle Bin</h2>
+
+    {% if deleted_items %}
+        <ul>
+            {% for item in deleted_items %}
+                <li>
+                    <strong>{{ item.name }}</strong> 
+                    (Deleted at: {{ item.deleted_at|date:"Y-m-d H:i" }})
+                    <a href="{% url 'restore_item' item.pk %}">🔄 Restore</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items in the recycle bin.</p>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+{
+  "name": "filems",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">Filems</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css":"npx @tailwindcss/cli -i ./static/src/css/input.css -o ./static/src/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.5",
+    "tailwindcss": "^4.1.5"
+  }
+}

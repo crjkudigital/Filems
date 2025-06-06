@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search Results{% endblock title %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+
+<div class="search-results-box p-4">
+
+    {% if files or folders %}
+        {% if folders %}
+            <h2 class="text-xl font-semibold mb-2 text-gray-800">Found {{ folders.count }} Folder(s):</h2>
+            <ul class="mb-6 list-disc list-inside text-blue-600">
+                {% for folder in folders %}
+                    <li>
+                        <a href="{% url 'dtfiles' folder.id %}" class="hover:underline">
+                            📁 {{ folder.folder_name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if files %}
+            <h2 class="text-xl font-semibold mb-2 text-gray-800">Found {{ files.count }} File(s):</h2>
+            <ul class="list-disc list-inside text-green-700">
+                {% for file in files %}
+                    <li>
+                        <a href="{{ file.file.url }}" target="_blank" class="hover:underline">
+                            📄 {{ file.file_name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        {% if query %}
+            <p class="text-gray-600 text-lg">No results found for <strong>"{{ query }}"</strong>.</p>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+{% endblock content %}
